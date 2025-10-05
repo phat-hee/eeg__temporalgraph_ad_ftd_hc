@@ -27,70 +27,81 @@ We do **not** own or redistribute the dataset. Please access and cite the origin
 
 ---
 
-## 🧠 Project Overview
-
-This project focuses on:
-
-- Transforming EEG signals into **temporal graph representations**
-- Extracting **signal-based**, **spectral**, and **topological** node and edge features
-- Applying **Graph Neural Network (GNN)** models for **multi-class classification** (AD, FTD, HC)
-- Evaluating model performance across temporal windows and frequency bands
+## 📘 Overview
+This project implements a **multi-band, attention-based Temporal Graph Neural Network (GNN)** framework for classifying EEG data into clinical groups (e.g., AD, FTD, and HC).  
+The model integrates **spatio-temporal graph processing** and **multi-band fusion** to capture both neural dynamics and functional connectivity patterns.
 
 ---
 
-## ⚙️ Features
+## ⚙️ Key Features
 
-- **EEG signal preprocessing** and transformation into **graph-based representations**
-- **Feature extraction** across multiple domains:
-  - **Statistical:** mean, std, min, max, slope, skewness, kurtosis, Shannon entropy  
-  - **Spectral:** mean PSD, relative power, spectral entropy (Welch method)  
-  - **Temporal/Dynamical:** Hjorth parameters (activity, mobility, complexity), RMS, zero crossings, SVD entropy  
-  - **Topological:** hub score (HITS algorithm)  
-  - **Edge-level:** phase lag, phase-locking value (PLV), spectral coherence, Pearson correlation, Granger causality, partial correlation  
-- **Graph construction:**
-  - Directed weighted graphs using **Granger causality** matrices  
-  - Sparsification using the **95th percentile threshold**
-  - Supports **4s and 6s windows** with **0% or 50% overlap**
-- **Graph neural network models:**
-  - GraphSAGE  
-  - Graph Attention Network (GAT)  
-  - Graph Convolutional Network (GCN)  
-  - Temporal GNN extensions for sequential graph data
-- **Cross-validation** and detailed performance reporting (**Accuracy**, **F1-score**, etc.)
-- **Support for multi-band EEG inputs** (e.g., alpha, beta, theta, delta)
+- **EEG Signal Preprocessing**
+  - Spike removal, NaN interpolation, detrending, and bandpass filtering
+  - Sliding window segmentation to generate temporal graph sequences
+  - Multi-band decomposition (e.g., Delta, Theta, Alpha, Beta, Gamma)
+
+- **Graph Construction**
+  - EEG channels represented as graph nodes  
+  - Edges based on statistical or functional connectivity (e.g., correlation, coherence)
+  - Temporal graphs generated per time window per frequency band
+
+- **Feature Extraction**
+  - **Statistical:** Mean, standard deviation, skewness, kurtosis  
+  - **Temporal:** Linear slope, ALFF (Amplitude of Low-Frequency Fluctuations)  
+  - **Topological:** Node degree, betweenness centrality, clustering coefficient  
 
 ---
 
-## 🔄 Pipeline Overview
+## 🧩 Model Architecture
 
-```text
-EEG Time Series
-   │
-   ├── Preprocessing (Filtering, Detrending, Normalization)
-   │
-   ├── Sliding Window Segmentation (4s / 6s, 0% / 50% overlap)
-   │
-   ├── Feature Extraction
-   │     ├─ Node features: statistical, spectral, temporal, topological
-   │     └─ Edge features: phase, coherence, causality, correlation
-   │
-   ├── Graph Construction (Granger causality + thresholding)
-   │
-   └── GNN-based Classification (GCN / GAT / GraphSAGE)
+### 1. **BandSpecificGraphSAGE**
+Each EEG frequency band is modeled independently using:
+- Two **GraphSAGE** layers for spatial feature extraction  
+- **LSTM** layers for temporal dynamics  
+- **Attention mechanism** to emphasize important temporal states  
+- **Layer normalization** and dropout for stable training  
 
+### 2. **MultiBandAttentionFusion**
+- Combines representations from all frequency bands  
+- **Band-level attention** learns the relative contribution of each frequency band  
+- Fully connected layers for classification into multiple classes (e.g., AD vs HC)  
+- **L1 regularization** promotes sparse and interpretable attention weights  
 
 ---
 
-📁 **Repository Structure**  
-`data/` (EEG data)  
-`graphs/` (Graph representations)  
-`models/` (GNN model definitions)  
-`utils/` (functions)  
-`train.py` (Main training script)  
-`requirements.txt` (Python dependencies)  
-`README.md`
+## 🧪 Training and Evaluation
 
+- **Cross-validation:** Stratified k-fold (default: 5 folds)
+- **Optimizer:** AdamW with cosine annealing scheduler  
+- **Loss:** Weighted CrossEntropy with adaptive class weighting  
+- **Metrics:** F1-score, Accuracy, Precision, Recall  
+- **Additional Features:**
+  - Gradient clipping for stability  
+  - Confidence tracking (average softmax confidence)  
+  - Attention-based explainability (band importance tracking)  
+  - Ensemble averaging across folds for robust inference  
 
+---
+
+## 📊 Outputs
+
+- Cross-validation results (average and per-fold metrics)
+- Band-level attention weights (importance analysis)
+- Confusion matrices per fold
+- Ensemble model combining best fold checkpoints
+
+---
+
+## 📁 Repository Structure
+
+```plaintext
+├── data/                # Raw and preprocessed EEG data
+├── graphs/              # Graph representations per subject and band
+├── models/              # Model definitions (GraphSAGE, Attention Fusion)
+├── utils/               # Utility functions (preprocessing, metrics, plotting)
+├── train.py             # Main training and cross-validation script
+├── requirements.txt     # Python dependencies
+└── README.md
 
 ---
 
