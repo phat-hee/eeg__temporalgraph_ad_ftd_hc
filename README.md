@@ -1,4 +1,4 @@
-# 🧠 EEG Graph Classification Using GNNs (AD / FTD / HC)
+# 🧠 EEG-Based Graph Neural Network Classification for AD, FTD, and HC
 
 This repository contains code for graph-based classification of EEG signals using Graph Neural Networks (GNNs). The goal is to distinguish between:
 
@@ -26,8 +26,6 @@ This dataset includes resting-state, eyes-closed EEG recordings from:
 We do **not** own or redistribute the dataset. Please access and cite the original paper if you intend to use the data.
 
 ---
-
-# 🧠 EEG-Based Graph Neural Network Classification for AD, FTD, and HC
 
 ## 📘 Project Overview
 
