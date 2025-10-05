@@ -29,28 +29,57 @@ We do **not** own or redistribute the dataset. Please access and cite the origin
 
 ## 🧠 Project Overview
 
+## 🧠 Project Overview
+
 This project focuses on:
 
-- Constructing graphs from EEG signals
-- Extracting both signal-based and topological node features
-- Applying GNN-based models for multi-class classification
-- Evaluating model performance in distinguishing between AD, FTD, and HC groups
+- Transforming EEG signals into **temporal graph representations**
+- Extracting **signal-based**, **spectral**, and **topological** node and edge features
+- Applying **Graph Neural Network (GNN)** models for **multi-class classification** (AD, FTD, HC)
+- Evaluating model performance across temporal windows and frequency bands
 
 ---
 
 ## ⚙️ Features
 
-- EEG signal preprocessing and transformation to graph representations
-- Extraction of features such as:
-  - Statistical (mean, std, skewness, kurtosis)
-  - Temporal (slope, ALFF)
-  - Topological (degree, betweenness, clustering coefficient)
-- Graph neural network models:
-  - GraphSAGE
-  - Graph Attention Network (GAT)
-  - Graph Convolutional Network (GCN)
-- Support for multi-band and windowed input sequences
-- Cross-validation and performance reporting (F1, accuracy, etc.)
+- **EEG signal preprocessing** and transformation into **graph-based representations**
+- **Feature extraction** across multiple domains:
+  - **Statistical:** mean, std, min, max, slope, skewness, kurtosis, Shannon entropy  
+  - **Spectral:** mean PSD, relative power, spectral entropy (Welch method)  
+  - **Temporal/Dynamical:** Hjorth parameters (activity, mobility, complexity), RMS, zero crossings, SVD entropy  
+  - **Topological:** hub score (HITS algorithm)  
+  - **Edge-level:** phase lag, phase-locking value (PLV), spectral coherence, Pearson correlation, Granger causality, partial correlation  
+- **Graph construction:**
+  - Directed weighted graphs using **Granger causality** matrices  
+  - Sparsification using the **95th percentile threshold**
+  - Supports **4s and 6s windows** with **0% or 50% overlap**
+- **Graph neural network models:**
+  - GraphSAGE  
+  - Graph Attention Network (GAT)  
+  - Graph Convolutional Network (GCN)  
+  - Temporal GNN extensions for sequential graph data
+- **Cross-validation** and detailed performance reporting (**Accuracy**, **F1-score**, etc.)
+- **Support for multi-band EEG inputs** (e.g., alpha, beta, theta, delta)
+
+---
+
+## 🔄 Pipeline Overview
+
+```text
+EEG Time Series
+   │
+   ├── Preprocessing (Filtering, Detrending, Normalization)
+   │
+   ├── Sliding Window Segmentation (4s / 6s, 0% / 50% overlap)
+   │
+   ├── Feature Extraction
+   │     ├─ Node features: statistical, spectral, temporal, topological
+   │     └─ Edge features: phase, coherence, causality, correlation
+   │
+   ├── Graph Construction (Granger causality + thresholding)
+   │
+   └── GNN-based Classification (GCN / GAT / GraphSAGE)
+
 
 ---
 
