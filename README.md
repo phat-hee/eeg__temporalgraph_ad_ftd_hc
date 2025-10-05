@@ -29,8 +29,6 @@ We do **not** own or redistribute the dataset. Please access and cite the origin
 
 ## 🧠 Project Overview
 
-## 🧠 Project Overview
-
 This project focuses on:
 
 - Transforming EEG signals into **temporal graph representations**
