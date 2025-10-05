@@ -1,0 +1,95 @@
+all win4_ol0 class0_2
+
+centeral:
+===== Cross-Validation Results =====
+Average F1: 0.7546
+Average Accuracy: 0.7538
+Average Recall: 0.7538
+Average Precision: 0.7656
+F1 Standard Deviation: 0.1127
+
+Average Band Importance Across All Folds:
+alpha: 0.5409 (54.1%)
+beta: 0.4591 (45.9%)
+
+======= Aggregated Results After Runs =======
+...
+alpha: 0.5152 ± 0.0511
+beta: 0.4848 ± 0.0511
+
+----
+frontal:
+===== Cross-Validation Results =====
+Average F1: 0.7589
+Average Accuracy: 0.7692
+Average Recall: 0.7692
+Average Precision: 0.7938
+F1 Standard Deviation: 0.0628
+
+Average Band Importance Across All Folds:
+alpha: 0.4707 (47.1%)
+beta: 0.5293 (52.9%)
+
+======= Aggregated Results After Runs =======
+...
+alpha: 0.4830 ± 0.0431
+beta: 0.5170 ± 0.0431
+
+
+-----
+occi:
+
+===== Cross-Validation Results =====
+Average F1: 0.3953
+Average Accuracy: 0.5538
+Average Recall: 0.5538
+Average Precision: 0.3077
+F1 Standard Deviation: 0.0368
+
+Average Band Importance Across All Folds:
+alpha: 0.4332 (43.3%)
+beta: 0.5668 (56.7%)
+
+======= Aggregated Results After Runs =======
+...
+alpha: 0.4980 ± 0.0643
+beta: 0.5020 ± 0.0643
+
+-----
+parie:
+
+===== Cross-Validation Results =====
+Average F1: 0.6889
+Average Accuracy: 0.7077
+Average Recall: 0.7077
+Average Precision: 0.7455
+F1 Standard Deviation: 0.0341
+
+Average Band Importance Across All Folds:
+alpha: 0.7158 (71.6%)
+beta: 0.2842 (28.4%)
+
+======= Aggregated Results After Runs =======
+...
+alpha: 0.5229 ± 0.0843
+beta: 0.4771 ± 0.0843
+
+
+
+-----
+temporal:
+===== Cross-Validation Results =====
+Average F1: 0.8729
+Average Accuracy: 0.8769
+Average Recall: 0.8769
+Average Precision: 0.9051
+F1 Standard Deviation: 0.0681
+
+Average Band Importance Across All Folds:
+alpha: 0.4991 (49.9%)
+beta: 0.5009 (50.1%)
+
+======= Aggregated Results After Runs =======
+...
+alpha: 0.5053 ± 0.0166
+beta: 0.4947 ± 0.0166
