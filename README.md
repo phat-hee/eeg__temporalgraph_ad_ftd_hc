@@ -6,27 +6,6 @@ This repository contains code for graph-based classification of EEG signals usin
 - **Frontotemporal Dementia (FTD)**
 - **Healthy Controls (HC)**
 
----
-
-## 📊 Dataset Used
-
-We use a publicly available EEG dataset from the following publication:
-
-> **A Dataset of Scalp EEG Recordings of Alzheimer’s Disease, Frontotemporal Dementia and Healthy Subjects from Routine EEG**  
-> 📄 [DOI: 10.3390/data8060095](https://doi.org/10.3390/data8060095)
-
-This dataset includes resting-state, eyes-closed EEG recordings from:
-
-| Group | Subjects | MMSE (Mean ± SD) | Age (Mean ± SD) |
-|-------|----------|------------------|-----------------|
-| AD    | 36       | 17.75 ± 4.5      | 66.4 ± 7.9      |
-| FTD   | 23       | 22.17 ± 8.22     | 63.6 ± 8.2      |
-| CN    | 29       | 30               | 67.9 ± 5.4      |
-
-We do **not** own or redistribute the dataset. Please access and cite the original paper if you intend to use the data.
-
----
-
 ## 📘 Project Overview
 
 This project focuses on:
@@ -38,25 +17,28 @@ This project focuses on:
 
 ---
 
-## 🧩 Dataset Description
+## 📊 Dataset Used
+
+We use a publicly available EEG dataset from the following publication:
+
+> **A Dataset of Scalp EEG Recordings of Alzheimer’s Disease, Frontotemporal Dementia and Healthy Subjects from Routine EEG**  
+> 📄 [DOI: 10.3390/data8060095](https://doi.org/10.3390/data8060095)
 
 This dataset contains **EEG resting-state (eyes-closed)** recordings from a total of **88 subjects**, divided into three groups:
 
 - **36** with Alzheimer’s disease (AD)  
 - **23** with Frontotemporal Dementia (FTD)  
-- **29** healthy controls (HC)  
+- **29** healthy controls (HC) 
 
-### Participant Information
+| Group | Subjects | MMSE (Mean ± SD) | Age (Mean ± SD) |
+|-------|----------|------------------|-----------------|
+| AD    | 36       | 17.75 ± 4.5      | 66.4 ± 7.9      |
+| FTD   | 23       | 22.17 ± 8.22     | 63.6 ± 8.2      |
+| CN    | 29       | 30               | 67.9 ± 5.4      |
 
-- **Cognitive Assessment:** Mini-Mental State Examination (MMSE, range: 0–30)  
-  - AD: 17.75 ± 4.5  
-  - FTD: 22.17 ± 8.22  
-  - HC: 30  
-- **Age (mean ± SD):**  
-  - AD: 66.4 ± 7.9  
-  - FTD: 63.6 ± 8.2  
-  - HC: 67.9 ± 5.4  
 - **Disease duration:** Median 25 months (IQR: 24–28.5)
+
+We do **not** own or redistribute the dataset. Please access and cite the original paper if you intend to use the data.
 
 ### Recording Details
 
@@ -69,6 +51,9 @@ This dataset contains **EEG resting-state (eyes-closed)** recordings from a tota
   - AD: 13.5 min (5.1–21.3)  
   - FTD: 12 min (7.9–16.9)  
   - HC: 13.8 min (12.5–16.5)
+
+---
+
 
 ### 🧼 Preprocessing Pipeline
 
