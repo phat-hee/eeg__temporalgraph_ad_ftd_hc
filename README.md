@@ -92,19 +92,6 @@ Each EEG frequency band is modeled independently using:
 
 ---
 
-## 📁 Repository Structure
-
-```plaintext
-├── data/                # Raw and preprocessed EEG data
-├── graphs/              # Graph representations per subject and band
-├── models/              # Model definitions (GraphSAGE, Attention Fusion)
-├── utils/               # Utility functions (preprocessing, metrics, plotting)
-├── train.py             # Main training and cross-validation script
-├── requirements.txt     # Python dependencies
-└── README.md
-
----
-
 ## 🚀 Getting Started
 
 ### 1. Install Dependencies
