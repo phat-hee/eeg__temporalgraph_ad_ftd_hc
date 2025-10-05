@@ -27,70 +27,89 @@ We do **not** own or redistribute the dataset. Please access and cite the origin
 
 ---
 
-## 📘 Overview
-This project implements a **multi-band, attention-based Temporal Graph Neural Network (GNN)** framework for classifying EEG data into clinical groups (e.g., AD, FTD, and HC).  
-The model integrates **spatio-temporal graph processing** and **multi-band fusion** to capture both neural dynamics and functional connectivity patterns.
+# 🧠 EEG-Based Graph Neural Network Classification for AD, FTD, and HC
+
+## 📘 Project Overview
+
+This project focuses on:
+
+- Constructing graphs from EEG signals  
+- Extracting both signal-based and topological node features  
+- Applying GNN-based models for multi-class classification  
+- Evaluating model performance in distinguishing between **Alzheimer’s Disease (AD)**, **Frontotemporal Dementia (FTD)**, and **Healthy Controls (HC)**  
 
 ---
 
-## ⚙️ Key Features
+## 🧩 Dataset Description
 
-- **EEG Signal Preprocessing**
-  - Spike removal, NaN interpolation, detrending, and bandpass filtering
-  - Sliding window segmentation to generate temporal graph sequences
-  - Multi-band decomposition (e.g., Delta, Theta, Alpha, Beta, Gamma)
+This dataset contains **EEG resting-state (eyes-closed)** recordings from a total of **88 subjects**, divided into three groups:
 
-- **Graph Construction**
-  - EEG channels represented as graph nodes  
-  - Edges based on statistical or functional connectivity (e.g., correlation, coherence)
-  - Temporal graphs generated per time window per frequency band
+- **36** with Alzheimer’s disease (AD)  
+- **23** with Frontotemporal Dementia (FTD)  
+- **29** healthy controls (HC)  
 
-- **Feature Extraction**
-  - **Statistical:** Mean, standard deviation, skewness, kurtosis  
-  - **Temporal:** Linear slope, ALFF (Amplitude of Low-Frequency Fluctuations)  
-  - **Topological:** Node degree, betweenness centrality, clustering coefficient  
+### Participant Information
+
+- **Cognitive Assessment:** Mini-Mental State Examination (MMSE, range: 0–30)  
+  - AD: 17.75 ± 4.5  
+  - FTD: 22.17 ± 8.22  
+  - HC: 30  
+- **Age (mean ± SD):**  
+  - AD: 66.4 ± 7.9  
+  - FTD: 63.6 ± 8.2  
+  - HC: 67.9 ± 5.4  
+- **Disease duration:** Median 25 months (IQR: 24–28.5)
+
+### Recording Details
+
+- **Device:** Nihon Kohden EEG 2100  
+- **Electrodes:** 19 scalp channels (Fp1–O2, 10–20 system) + 2 mastoid references (A1, A2)  
+- **Montage:** Referential (Cz as common reference)  
+- **Sampling rate:** 500 Hz  
+- **Filters:** 0.3 s time constant, high-frequency cutoff at 70 Hz  
+- **Recording duration:**  
+  - AD: 13.5 min (5.1–21.3)  
+  - FTD: 12 min (7.9–16.9)  
+  - HC: 13.8 min (12.5–16.5)
+
+### 🧼 Preprocessing Pipeline
+
+Before separating signals into frequency bands and constructing graph representations, EEG data underwent the following preprocessing steps:
+
+1. **Band-pass filtering (0.5–45 Hz)** using a Butterworth filter  
+2. **Re-referencing** to A1–A2  
+3. **Artifact Subspace Reconstruction (ASR)** using EEGLAB to remove noisy segments exceeding a 0.5-second window SD threshold of 17  
+4. **Independent Component Analysis (ICA)** (RunICA algorithm)  
+5. **Automatic artifact rejection** via *ICLabel* (eye/jaw artifacts removed)  
+
+Even under eyes-closed conditions, minor eye movement artifacts were detected and removed automatically.  
+Preprocessed files are provided in the `derivatives/` folder as `.set` files (BIDS-compatible format).  
+
+For more details, refer to the published paper:  
+> **A Dataset of Scalp EEG Recordings of Alzheimer’s Disease, Frontotemporal Dementia and Healthy Subjects from Routine EEG**  
+> *Data, 8(6), 95 (2023)* — [https://doi.org/10.3390/data8060095](https://doi.org/10.3390/data8060095)
+
+---
+
+## ⚙️ Features
+
+- EEG signal preprocessing and transformation to graph representations  
+- Extraction of features such as:  
+  - **Statistical:** mean, std, skewness, kurtosis  
+  - **Temporal:** slope, ALFF  
+  - **Topological:** degree, betweenness, clustering coefficient  
+- Graph neural network models:  
+  - **GraphSAGE**  
+  - **Graph Attention Network (GAT)**  
+  - **Graph Convolutional Network (GCN)**  
+- Support for **multi-band** and **windowed** input sequences  
+- **Cross-validation** and **performance reporting** (F1-score, accuracy, etc.)
 
 ---
 
-## 🧩 Model Architecture
+## 📁 Repository Structure
 
-### 1. **BandSpecificGraphSAGE**
-Each EEG frequency band is modeled independently using:
-- Two **GraphSAGE** layers for spatial feature extraction  
-- **LSTM** layers for temporal dynamics  
-- **Attention mechanism** to emphasize important temporal states  
-- **Layer normalization** and dropout for stable training  
 
-### 2. **MultiBandAttentionFusion**
-- Combines representations from all frequency bands  
-- **Band-level attention** learns the relative contribution of each frequency band  
-- Fully connected layers for classification into multiple classes (e.g., AD vs HC)  
-- **L1 regularization** promotes sparse and interpretable attention weights  
-
----
-
-## 🧪 Training and Evaluation
-
-- **Cross-validation:** Stratified k-fold (default: 5 folds)
-- **Optimizer:** AdamW with cosine annealing scheduler  
-- **Loss:** Weighted CrossEntropy with adaptive class weighting  
-- **Metrics:** F1-score, Accuracy, Precision, Recall  
-- **Additional Features:**
-  - Gradient clipping for stability  
-  - Confidence tracking (average softmax confidence)  
-  - Attention-based explainability (band importance tracking)  
-  - Ensemble averaging across folds for robust inference  
-
----
-
-## 📊 Outputs
-
-- Cross-validation results (average and per-fold metrics)
-- Band-level attention weights (importance analysis)
-- Confusion matrices per fold
-- Ensemble model combining best fold checkpoints
-
----
 
 ## 🚀 Getting Started
 
