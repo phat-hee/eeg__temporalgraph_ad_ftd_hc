@@ -105,10 +105,6 @@ pip install -r requirements.txt
 Please obtain the EEG dataset from the original source:
 👉 https://doi.org/10.3390/data8060095
 
-### 3. Run the Training Script
-```bash
-python train.py
-```
 arguments (e.g., model type, frequency band, window length) can be configured inside the script or passed as CLI flags.
 
 ## 📖 Citation
