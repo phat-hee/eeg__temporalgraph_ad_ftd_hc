@@ -1,4 +1,4 @@
-# 🧠 EEG-Based Graph Neural Network Classification for AD, FTD, and HC
+# 🧠 Classification of Healthy Controls versus Alzheimer’s and Frontotemporal Dementia Using Temporal Graph Neural Networks: A Resting-State EEG Study”
 
 This repository contains code for graph-based classification of EEG signals using Graph Neural Networks (GNNs). The goal is to distinguish between:
 
